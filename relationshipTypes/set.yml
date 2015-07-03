@@ -1,22 +1,26 @@
 '@type': RelationshipType
 name: set
 pluralName: sets
-description: A group is part of a group
+description: A group may be a parent (superset) or child (subset) of another group.
 roleTypes:
   - '@type': RoleType
-    id: roleTypes/subgroup
-    name: subgroup
-    pluralName: subgroups
+    id: roleTypes/child
+    name: child
+    pluralName: children
     relationshipType: relationshipTypes/set
-    label: "Groups that belong to {target}"
+    label: "Groups that are children of {target}"
   - '@type': RoleType
-    id: roleTypes/parent-group
-    name: parent group
-    pluralName: parent group
+    id: roleTypes/parent
+    name: parent
+    pluralName: parents
     relationshipType: relationshipTypes/set
-    label: "Groups that include {target}"
+    label: "Groups that are parents of {target}"
 links:
   - '@type': LinkType
-    source: subgroup
-    target: parent-group
-    label: "are part of {target}"
+    source: child
+    target: parent
+    label: "is child of {target}"
+  - '@type': LinkType
+    source: parent
+    target: child
+    label: "is parent of {target}"
