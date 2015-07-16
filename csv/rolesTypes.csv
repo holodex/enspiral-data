@@ -1,0 +1,9 @@
+id,label,relationshipType
+member,People in {pair},membership
+group,Groups that include {pair},membership
+mentor,People that mentor {pair},mentorship
+mentee,People that {pair} mentors,mentorship
+subgroup,Groups that are part of {pair},set
+parent-group,Groups that include {pair},set
+steward,People that steward {pair},stewardship
+stewardee,People that {pair} stewards,stewardship
