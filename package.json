@@ -1,0 +1,21 @@
+{
+  "name": "holodex.enspiral.info",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Enspiral's Holodex app instance",
+  "main": "index.js",
+  "scripts": {
+    "start": "holodex",
+    "deploy": "git remote add deploy dokku@holodex.enspiral.info:holodex; git push deploy master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holodex/holodex.enspiral.info.git"
+  },
+  "author": "Enspiral",
+  "license": "ODbL-1.0",
+  "bugs": {
+    "url": "https://github.com/holodex/holodex.enspiral.info/issues"
+  },
+  "homepage": "https://github.com/holodex/holodex.enspiral.info#readme"
+}
