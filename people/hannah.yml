@@ -43,7 +43,7 @@ relationships:
         <<: *me 
       - '@type': Role
         type: roleTypes/stewardee
-        agent: people/malcolm
+        agent: people/malcolm-shearer
   - '@type': Relationship
     type: relationshipTypes/stewardship
     context: groups/loomio
