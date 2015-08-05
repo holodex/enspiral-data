@@ -1,0 +1,7 @@
+id,relationshipType,source,target,label
+is-member-of,membership,member,group,
+has-member,membership,group,member,
+mentors,mentorship,mentor,mentee,
+is-subgroup-of,set,subgroup,parent-group,
+has-subgroup,set,parent-group,subgroup,
+stewards,stewardship,steward,stewardee,

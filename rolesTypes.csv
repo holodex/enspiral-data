@@ -1,0 +1,9 @@
+id,label,relationshipType
+member,,membership
+group,,membership
+mentor,,mentorship
+mentee,,mentorship
+subgroup,,set
+parent-group,,set
+steward,,stewardship
+stewardee,,stewardship
