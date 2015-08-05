@@ -1,7 +1,0 @@
-id,relationshipType,source,target,label
-(person)_is-part-of,membership,member,group,{source} is part of {target}
-includes_(person),membership,group,member,{source} includes {target}
-mentors,mentorship,mentor,mentee,(source} mentors {target}
-(group)_is-part-of,set,subgroup,parent-group,{source} is part of {target}
-includes_(group),set,parent-group,subgroup,{source} includes {target}
-stewards,stewardship,steward,stewardee,{source} stewards {target}
