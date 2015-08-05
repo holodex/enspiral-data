@@ -1,6 +1,6 @@
 '@type': Person
 name: Rochelle Furneaux
-image: https://loomio-attachments.s3.amazonaws.com/users/uploaded_avatars/000/023/918/large/dobbyavatar.jpg?1403478755
+image: https://loomio-attachments.s3.amazonaws.com/users/uploaded_avatars/000/000/080/large/2012-03-26_22.58.25.jpg?1417033509
 relationships:
   - '@type': Relationship
     type: relationshipTypes/membership
