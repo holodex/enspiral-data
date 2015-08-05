@@ -7,7 +7,7 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/member
-        agent: people/brenda-wallace.yml
+        agent: people/brenda-wallace
       - '@type': Role
         type: roleTypes/group
         agent: groups/rabid
