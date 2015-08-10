@@ -29,7 +29,17 @@ relationships:
         agent: people/chelsea-robinson
       - '@type': Role
         type: roleTypes/stewardee
-        agent: people/richard-bartlett
+        agent: people/alanna
+  - '@type': Relationship
+    type: relationshipTypes/stewardship
+    context: groups/loomio
+    roles:
+      - '@type': Role
+        type: roleTypes/steward
+        agent: people/chelsea-robinson
+      - '@type': Role
+        type: roleTypes/stewardee
+        agent: people/james-kiesel
   - '@type': Relationship
     type: relationshipTypes/membership
     roles:
