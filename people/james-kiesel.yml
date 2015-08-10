@@ -20,3 +20,13 @@ relationships:
       - '@type': Role
         type: roleTypes/group
         agent: groups/enspiral-services
+  - '@type': Relationship
+    type: relationshipTypes/stewardship
+    context: groups/loomio
+    roles:
+      - '@type': Role
+        type: roleTypes/steward
+        agent: people/james-kiesel
+      - '@type': Role
+        type: roleTypes/stewardee
+        agent: people/richard-bartlett

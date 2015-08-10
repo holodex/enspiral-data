@@ -11,7 +11,7 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/member
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/group
         agent: groups/loomio
@@ -21,18 +21,17 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/steward
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/stewardee
-        agent: people/james-kiesel
+        agent: people/mary-o'keeffe
   - '@type': Relationship
     type: relationshipTypes/stewardship
     context: groups/loomio
     roles:
       - '@type': Role
         type: roleTypes/steward
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/stewardee
-        agent: people/rob-guthrie
-
+        agent: people/derek

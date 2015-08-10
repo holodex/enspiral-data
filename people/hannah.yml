@@ -10,7 +10,7 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/member
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/group
         agent: groups/enspiral-craftworks
@@ -19,7 +19,7 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/member
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/group
         agent: groups/enspiral-services
@@ -29,7 +29,7 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/member
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/group
         agent: groups/loomio
@@ -40,17 +40,17 @@ relationships:
     roles:
       - '@type': Role
         type: roleTypes/steward
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/stewardee
-        agent: people/malcolm-shearer
+        agent: people/jesse
   - '@type': Relationship
     type: relationshipTypes/stewardship
     context: groups/loomio
     roles:
       - '@type': Role
         type: roleTypes/steward
-        <<: *me 
+        <<: *me
       - '@type': Role
         type: roleTypes/stewardee
-        agent: people/viv-maidaborn
+        agent: people/chelsea-robinson
