@@ -37,4 +37,4 @@ relationships:
         agent: people/jesse
       - '@type': Role
         type: roleTypes/stewardee
-        agent: groups/mix
+        agent: people/mix
