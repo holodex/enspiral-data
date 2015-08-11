@@ -44,13 +44,3 @@ relationships:
       - '@type': Role
         type: roleTypes/stewardee
         agent: people/jesse
-  - '@type': Relationship
-    type: relationshipTypes/stewardship
-    context: groups/loomio
-    roles:
-      - '@type': Role
-        type: roleTypes/steward
-        <<: *me
-      - '@type': Role
-        type: roleTypes/stewardee
-        agent: people/chelsea-robinson

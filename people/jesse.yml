@@ -29,23 +29,3 @@ relationships:
       - '@type': Role
         type: roleTypes/group
         agent: groups/loomio
-  - '@type': Relationship
-    type: relationshipTypes/stewardship
-    context: groups/loomio
-    roles:
-      - '@type': Role
-        type: roleTypes/steward
-        agent: people/jesse
-      - '@type': Role
-        type: roleTypes/stewardee
-        agent: people/hannah
-  - '@type': Relationship
-    type: relationshipTypes/stewardship
-    context: groups/loomio
-    roles:
-      - '@type': Role
-        type: roleTypes/steward
-        agent: people/jesse
-      - '@type': Role
-        type: roleTypes/stewardee
-        agent: people/aaron-thornton
