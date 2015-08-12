@@ -1,0 +1,9 @@
+id,relationshipType,name,pluralName,labels,queryLabels,color
+member,membership,member,members,,a member in {context},#3F51B5
+group,membership,group,groups,,a group in {context},#2196F3
+mentor,mentorship,mentor,mentors,People that mentor {target},a mentor in {context},
+mentee,mentorship,mentee,mentees,People that {source} mentors,a mentee in {context},
+subgroup,set,subgroup,subgroups,,a subgroup in {context},#E91E63
+parent-group,set,parent group,parent groups,,a parent-group in {context},#FF5722
+steward,stewardship,steward,stewards,,a steward in {context},#F44336
+stewardee,stewardship,stewardee,stewardees,,a steward in {context},#795548

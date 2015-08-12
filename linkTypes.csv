@@ -1,0 +1,7 @@
+id,relationshipType,inverse,source,target,labels,queryLabels,color
+is-member-of,membership,has-member,member,group,{source} belongs to {target},"People who belong to {target},{source}'s groups",#3F51B5
+has-member,membership,is-member-of,group,member,{source} includes {target},"People in {source},Groups that include {target}",#2196F3
+mentors,mentorship,,mentor,mentee,"{source} mentors {target},mentors in {context}","People who mentor {target},People who {source} mentors,People who mentor in {context}",#673AB7
+is-subgroup-of,set,has-subgroup,subgroup,parent-group,{source} is part of {target},"Groups that are part of {target},Groups that are parent-groups of {source}",#E91E63
+has-subgroup,set,is-subgroup-of,parent-group,subgroup,{source} incorporates {target},"Groups with the subgroup {target},Groups that are subgroups of {source}",#FF5722
+stewards,stewardship,,steward,stewardee,"{source} stewards {target}, stewards in {context}","People who steward {target},People who are stewarded by {source},People who steward others in {context}",#F44336
