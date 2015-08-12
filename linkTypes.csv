@@ -1,7 +1,7 @@
-id,relationshipType,source,target,label
-is-member-of,membership,member,group,
-has-member,membership,group,member,
-mentors,mentorship,mentor,mentee,
-is-subgroup-of,set,subgroup,parent-group,
-has-subgroup,set,parent-group,subgroup,
-stewards,stewardship,steward,stewardee,
+id,relationshipType,source,target,labels,queryLabels
+is-member-of,membership,member,group,{source} belongs to {target},"People who belong to {target},{source}'s groups"
+has-member,membership,group,member,{source} includes {target},"People in {source},Groups that include {target}"
+mentors,mentorship,mentor,mentee,"{source} mentors {target},mentors in {context}","People who mentor {target},People who {source} mentors,People who mentor in {context}"
+is-subgroup-of,set,subgroup,parent-group,{source} is part of {target},"Groups that are part of {target},Groups that are parent-groups of {source}"
+has-subgroup,set,parent-group,subgroup,{source} incorporates {target},"Groups with the subgroup {target},Groups that are subgroups of {source}"
+stewards,stewardship,steward,stewardee,"{source} stewards {target}, stewards in {context}","People who steward {target},People who are stewarded by {source},People who steward others in {context}"

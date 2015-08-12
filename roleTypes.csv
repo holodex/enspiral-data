@@ -1,9 +1,9 @@
-id,label,relationshipType
-member,,membership
-group,,membership
-mentor,,mentorship
-mentee,,mentorship
-subgroup,,set
-parent-group,,set
-steward,,stewardship
-stewardee,,stewardship
+id,relationshipType,labels,queryLabels
+member,membership,,a member in {context}
+group,membership,,a group in {context}
+mentor,mentorship,People that mentor {target},a mentor in {context}
+mentee,mentorship,People that {source} mentors,a mentee in {context}
+subgroup,set,,a subgroup in {context}
+parent-group,set,,a parent-group in {context}
+steward,stewardship,,a steward in {context}
+stewardee,stewardship,,a steward in {context}
