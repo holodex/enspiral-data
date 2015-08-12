@@ -1,2 +1,3 @@
 # enspiral-data
-data for http://holodex.enspiral.info
+
+data for <http://holodex.enspiral.com>
