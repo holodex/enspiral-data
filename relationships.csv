@@ -102,6 +102,7 @@ enspiral-craftworks,craig,stewards,nicola
 ,darcy-burge,is-member-of,enspiral-dev-academy
 ,derek,is-member-of,enspiral-craftworks
 ,derek,is-member-of,enspiral-services
+,derek,is-member-of,loomio
 ,don-smith,is-member-of,auckland-pod
 ,don-smith,is-member-of,enspiral-academy
 ,don-smith,is-member-of,enspiral-dev-academy
@@ -146,6 +147,7 @@ loomio,hannah,stewards,jesse
 ,jaime-mcdonald,is-member-of,enspiral-services
 ,james-kiesel,is-member-of,iguanas
 ,james-kiesel,is-member-of,enspiral-services
+,james-kiesel,is-member-of,loomio
 loomio,james-kiesel,stewards,richard-bartlett
 ,james-king,is-member-of,freewheelers
 ,james-king,is-member-of,enspiral-services
@@ -154,7 +156,7 @@ loomio,james-kiesel,stewards,richard-bartlett
 ,jesse,is-member-of,enspiral-craftworks
 ,jesse,is-member-of,enspiral-services
 ,jesse,is-member-of,loomio
-,jesse,stewards,mix
+enspiral-craftworks,jesse,stewards,mix
 ,jon,is-member-of,enspiral-craftworks
 enspiral-craftworks,jon,stewards,mikey
 ,jon,is-member-of,loomio
