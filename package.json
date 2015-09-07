@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "forkable": "^1.1.7",
+    "fsdown": "holodex/fs-db#fsdown",
+    "level-ws": "0.0.0",
+    "levelup": "^1.2.1",
+    "lodash.assign": "^3.2.0",
+    "lodash.foreach": "^3.0.3",
+    "through2": "^2.0.0"
+  }
+}

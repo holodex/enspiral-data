@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+
+var Path = require('path')
+var fs = require('fs')
+var levelup = require('levelup')
+var levelws = require('level-ws')
+var fsdown = require('fsdown')
+var forEach = require('lodash.foreach')
+var assign = require('lodash.assign')
+var through = require('through2')
+var forkable = require('forkable')
+
+var migratePath = process.argv[2]
+if (migratePath == null) {
+  console.log("migrate path not given!")
+  process.exit(1)
+}
+
+var migrate = require(
+  Path.join(process.cwd(), migratePath)
+)
+
+if (typeof migrate !== 'function') {
+  console.log("migrate is not a function")
+  process.exit(1)
+}
+
+var dbs = {}
+
+// get starting dbs
+fs.readdirSync('.')
+.filter(function (path) { return Path.extname(path) === '.csv'})
+.forEach(function (path) {
+  var type = Path.basename(path, '.csv')
+  dbs[type] = getDb(type)
+})
+
+var toMigrate = through.obj()
+
+// read
+forEach(dbs, function (db, type) {
+  db.createReadStream()
+  .pipe(through.obj(function (row, enc, cb) {
+    assign(row.value, { type: type })
+    cb(null, row)
+  })).pipe(toMigrate)
+})
+
+// migrate
+var migrated = toMigrate.pipe(migrate())
+
+// get ending dbs
+forkable(
+  migrated.pipe(through.obj(function (row, enc, cb) {
+    var type = row.value.type
+    if (!dbs[type]) {
+      dbs[type] = getDb(type)
+    }
+    cb(null, row)
+  }))
+)
+.fork(function (row) {
+  return row.value.type
+})
+.pipe(function (type) {
+  return dbs[type].createWriteStream()
+})
+
+function getDb (type) {
+  var path = Path.join(process.cwd(), type + '.csv')
+  return levelws(levelup(path, {
+    db: fsdown({ codec: 'csv', keyAttribute: 'id' })
+  }))
+}
