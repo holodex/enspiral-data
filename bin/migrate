@@ -25,20 +25,20 @@ if (typeof migrate !== 'function') {
   process.exit(1)
 }
 
-var dbs = {}
+var inputs = {}
 
-// get starting dbs
+// get starting db inputs
 fs.readdirSync('.')
 .filter(function (path) { return Path.extname(path) === '.csv'})
 .forEach(function (path) {
   var type = Path.basename(path, '.csv')
-  dbs[type] = getDb(type)
+  inputs[type] = getDb(type)
 })
 
 var toMigrate = through.obj()
 
 // read
-forEach(dbs, function (db, type) {
+forEach(inputs, function (db, type) {
   db.createReadStream()
   .pipe(through.obj(function (row, enc, cb) {
     assign(row.value, { type: type })
@@ -49,20 +49,22 @@ forEach(dbs, function (db, type) {
 // migrate
 var migrated = toMigrate.pipe(migrate())
 
-// get ending dbs
+var outputs = {} 
+
+// get ending db outputs
 forkable(
   migrated
 )
 .fork(function (row) {
   var type = row.value.type
   delete row.value.type
-  if (!dbs[type]) {
-    dbs[type] = getDb(type, true)
+  if (outputs[type] == null) {
+    outputs[type] = getDb(type, true)
   }
   return type
 })
 .pipe(function (type) {
-  return dbs[type].createWriteStream({ valueEncoding: 'json' })
+  return outputs[type].createWriteStream({ valueEncoding: 'json' })
 })
 
 function getDb (type, isTmp) {
