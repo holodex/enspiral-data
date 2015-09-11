@@ -5,9 +5,10 @@ var fs = require('fs')
 var levelup = require('levelup')
 var levelws = require('level-ws')
 var fsdown = require('fsdown')
-var forEach = require('lodash.foreach')
+var map = require('lodash.map')
 var assign = require('lodash.assign')
 var through = require('through2')
+var multistream = require('multistream')
 var forkable = require('forkable')
 
 var migratePath = process.argv[2]
@@ -25,29 +26,25 @@ if (typeof migrate !== 'function') {
   process.exit(1)
 }
 
-var inputs = {}
-
 // get starting db inputs
-fs.readdirSync('.')
+var inputs = fs.readdirSync('.')
 .filter(function (path) { return Path.extname(path) === '.csv'})
-.forEach(function (path) {
+.map(function (path) {
   var type = Path.basename(path, '.csv')
-  inputs[type] = getDb(type)
+  return getDb(type)
 })
-
-var toMigrate = through.obj()
-
-// read
-forEach(inputs, function (db, type) {
-  db.createReadStream()
+.map(function (db) {
+  return db.createReadStream({ valueEncoding: 'json' })
   .pipe(through.obj(function (row, enc, cb) {
-    assign(row.value, { type: type })
+    assign(row.value, { type: db.type })
     cb(null, row)
-  })).pipe(toMigrate)
+  }))
 })
 
 // migrate
-var migrated = toMigrate.pipe(migrate())
+var migrated = multistream.obj(inputs).pipe(migrate())
+
+migrated.on('data', console.log)
 
 var outputs = {} 
 
@@ -70,7 +67,9 @@ forkable(
 function getDb (type, isTmp) {
   var dir = isTmp ? 'tmp' : ''
   var path = Path.join(process.cwd(), dir, type + '.csv')
-  return levelws(levelup(path, {
+  var db = levelws(levelup(path, {
     db: fsdown({ codec: 'csv', keyAttribute: 'id' })
   }))
+  db.type = type
+  return db
 }
