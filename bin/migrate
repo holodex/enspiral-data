@@ -63,7 +63,7 @@ forkable(
   return row.value.type
 })
 .pipe(function (type) {
-  return dbs[type].createWriteStream()
+  return dbs[type].createWriteStream({ valueEncoding: 'json' })
 })
 
 function getDb (type) {
