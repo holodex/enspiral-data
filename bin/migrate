@@ -57,7 +57,7 @@ forkable(
   var type = row.value.type
   delete row.value.type
   if (!dbs[type]) {
-    dbs[type] = getDb(type)
+    dbs[type] = getDb(type, true)
   }
   return type
 })
@@ -65,8 +65,9 @@ forkable(
   return dbs[type].createWriteStream({ valueEncoding: 'json' })
 })
 
-function getDb (type) {
-  var path = Path.join(process.cwd(), type + '.csv')
+function getDb (type, isTmp) {
+  var dir = isTmp ? 'tmp' : ''
+  var path = Path.join(process.cwd(), dir, type + '.csv')
   return levelws(levelup(path, {
     db: fsdown({ codec: 'csv', keyAttribute: 'id' })
   }))
