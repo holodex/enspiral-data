@@ -51,16 +51,15 @@ var migrated = toMigrate.pipe(migrate())
 
 // get ending dbs
 forkable(
-  migrated.pipe(through.obj(function (row, enc, cb) {
-    var type = row.value.type
-    if (!dbs[type]) {
-      dbs[type] = getDb(type)
-    }
-    cb(null, row)
-  }))
+  migrated
 )
 .fork(function (row) {
-  return row.value.type
+  var type = row.value.type
+  delete row.value.type
+  if (!dbs[type]) {
+    dbs[type] = getDb(type)
+  }
+  return type
 })
 .pipe(function (type) {
   return dbs[type].createWriteStream({ valueEncoding: 'json' })
