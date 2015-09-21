@@ -34,7 +34,7 @@ var inputs = fs.readdirSync('.')
 .map(function (db) {
   return db.createReadStream()
   .pipe(through.obj(function (row, enc, cb) {
-    assign(row.value, { type: db.type })
+    assign(row, { type: db.type })
     console.log('in', row, enc)
     cb(null, row)
   }))
@@ -53,8 +53,8 @@ forkable(
   migrated
 )
 .fork(function (row) {
-  var type = row.value.type
-  delete row.value.type
+  var type = row.type
+  delete row.type
   return type
 })
 .pipe(function (type) {
