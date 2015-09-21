@@ -1,5 +1,7 @@
-id,description
-membership,A member is part of a group
-mentorship,A mentor mentors a mentee.
-set,A group is part of a group
-stewardship,A steward stewards a stewardee.
+id,inverse,context,source,target,labels,queryLabels,color
+is-member-of,has-member,,,,{source} belongs to {target},"People who belong to {target},{source}'s groups",#3F51B5
+has-member,is-member-of,,,,{source} includes {target},"People in {source},Groups that include {target}",#2196F3
+mentors,,,,,"{source} mentors {target},mentors in {context}","People who mentor {target},People who {source} mentors,People who mentor in {context}",#673AB7
+is-subgroup-of,has-subgroup,,,,{source} is part of {target},"Groups that are part of {target},Groups that are parent-groups of {source}",#E91E63
+has-subgroup,is-subgroup-of,,,,{source} incorporates {target},"Groups with the subgroup {target},Groups that are subgroups of {source}",#FF5722
+stewards,,,,,{source} stewards {target},"People who steward {target},People who are stewarded by {source},People who steward others in {context}",#F44336

@@ -1,0 +1,4 @@
+id,name,subTypeOf,description
+agent,Agent,http://xmlns.com/foaf/0.1/Agent,A thing with agency.
+person,Person,http://xmlns.com/foaf/0.1/Person,A person.
+group,Group,http://xmlns.com/foaf/0.1/Organization,A group.
