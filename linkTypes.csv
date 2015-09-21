@@ -4,4 +4,4 @@ has-member,membership,is-member-of,group,member,{source} includes {target},"Peop
 mentors,mentorship,,mentor,mentee,"{source} mentors {target},mentors in {context}","People who mentor {target},People who {source} mentors,People who mentor in {context}",#673AB7
 is-subgroup-of,set,has-subgroup,subgroup,parent-group,{source} is part of {target},"Groups that are part of {target},Groups that are parent-groups of {source}",#E91E63
 has-subgroup,set,is-subgroup-of,parent-group,subgroup,{source} incorporates {target},"Groups with the subgroup {target},Groups that are subgroups of {source}",#FF5722
-stewards,stewardship,,steward,stewardee,"{source} stewards {target}","People who steward {target},People who are stewarded by {source},People who steward others in {context}",#F44336
+stewards,stewardship,,steward,stewardee,{source} stewards {target},"People who steward {target},People who are stewarded by {source},People who steward others in {context}",#F44336
