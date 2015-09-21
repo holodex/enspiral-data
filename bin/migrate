@@ -2,9 +2,7 @@
 
 var Path = require('path')
 var fs = require('fs')
-var levelup = require('levelup')
-var levelws = require('level-ws')
-var fsdown = require('fsdown')
+var FsDb = require('fs-db')
 var map = require('lodash.map')
 var assign = require('lodash.assign')
 var through = require('through2')
@@ -34,9 +32,10 @@ var inputs = fs.readdirSync('.')
   return getDb(type)
 })
 .map(function (db) {
-  return db.createReadStream({ valueEncoding: 'json' })
+  return db.createReadStream()
   .pipe(through.obj(function (row, enc, cb) {
     assign(row.value, { type: db.type })
+    console.log('in', row, enc)
     cb(null, row)
   }))
 })
@@ -44,7 +43,7 @@ var inputs = fs.readdirSync('.')
 // migrate
 var migrated = multistream.obj(inputs).pipe(migrate())
 
-migrated.on('data', console.log)
+migrated.on('data', console.log.bind(console, 'out'))
 
 var outputs = {} 
 
@@ -55,21 +54,23 @@ forkable(
 .fork(function (row) {
   var type = row.value.type
   delete row.value.type
-  if (outputs[type] == null) {
-    outputs[type] = getDb(type, true)
-  }
   return type
 })
 .pipe(function (type) {
-  return outputs[type].createWriteStream({ valueEncoding: 'json' })
+  if (outputs[type] == null) {
+    outputs[type] = getDb(type, true)
+  }
+  return outputs[type].createWriteStream()
 })
 
 function getDb (type, isTmp) {
   var dir = isTmp ? 'tmp' : ''
   var path = Path.join(process.cwd(), dir, type + '.csv')
-  var db = levelws(levelup(path, {
-    db: fsdown({ codec: 'csv', keyAttribute: 'id' })
-  }))
+  var db = FsDb({
+    location: path,
+    codec: 'csv',
+    keyAttribute: 'id'
+  })
   db.type = type
   return db
 }

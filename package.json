@@ -2,8 +2,6 @@
   "dependencies": {
     "forkable": "^1.1.7",
     "fsdown": "holodex/fs-db#fsdown",
-    "level-ws": "0.0.0",
-    "levelup": "^1.2.1",
     "lodash.assign": "^3.2.0",
     "lodash.map": "^3.1.4",
     "multistream": "^2.0.2",
