@@ -68,7 +68,7 @@ function getDb (type, isTmp) {
   var path = Path.join(process.cwd(), dir, type + '.csv')
   var db = FsDb({
     location: path,
-    codec: 'csv',
+    codec: ['csv', { newline: '\n' }],
     keyAttribute: 'id'
   })
   db.type = type
