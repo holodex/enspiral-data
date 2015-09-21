@@ -41,7 +41,8 @@ var inputs = fs.readdirSync('.')
 })
 
 // migrate
-var migrated = multistream.obj(inputs).pipe(migrate())
+var migrated = multistream.obj(inputs)
+  .pipe(migrate())
 
 migrated.on('data', console.log.bind(console, 'out'))
 
