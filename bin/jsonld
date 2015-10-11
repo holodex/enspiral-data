@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var Path = require('path')
+var through = require('through2')
+var assign = require('lodash.assign')
+
+var getInput = require('../lib/input')
+
+var input = getInput(Path.join(__dirname, '..'))
+
+var data = {
+  '@context': [
+    'https://rawgit.com/valueflows/agent/master/context.jsonld',
+    {
+      'dex': 'https://holodex.enspiral.com/api/'
+    }
+  ],
+  '@graph': []
+}
+
+// massage data into json-ld objects
+// TODO automate this using the js vocab
+var ldStream = input
+  .pipe(through.obj(function (obj, enc, cb) {
+    // prefix '@id' refs with Holodex api endpoint
+    // TODO automate this using the js vocab
+    var i = obj.value
+    var o
+    switch (obj.type) {
+      case 'agents':
+        o = {
+          '@id': 'dex:agents/' + i.id,
+          '@type': capitalize(i.agentType),
+          displayName: i.name,
+          image: i.image
+        }
+        break
+      case 'agentTypes':
+        break
+      case 'relationships':
+        o = {
+          '@id': 'dex:relationships/' + i.id,
+          '@type': 'Relationship',
+          subject: 'dex:agents/' + i.source,
+          relationship: 'dex:relationshipTypes/' + i.relationshipType,
+          object: 'dex:agents/' + i.target,
+          context: i.context ? ('dex:agents/' + i.context) : undefined
+        }
+        break
+      case 'relationshipTypes':
+        o = {
+          '@id': 'dex:relationshipTypes/' + i.id,
+          '@type': 'rdf:Property',
+          inverseOf: 'dex:relationshipTypes/' + i.inverse,
+          'rdfs:label': {
+            en: i.labels.split(',')
+          }
+        }
+        break
+    }
+    cb(null, o)
+  }))
+
+// write json-ld objects into json-ld graph
+ldStream.pipe(through.obj(function (obj, enc, cb) {
+  data['@graph'].push(obj)
+  cb()
+}, function (cb) {
+  var outputPath = Path.join(__dirname, '..', 'data.jsonld')
+  var output = JSON.stringify(data, null, 2)
+  fs.writeFile(outputPath, output, 'utf8', function (err) {
+    if (err) { throw err }
+    //console.log("done", data)
+    cb()
+  })
+}))
+
+// TODO get a module yo
+function capitalize (s) {
+  return s[0].toUpperCase() + s.slice(1)
+}
