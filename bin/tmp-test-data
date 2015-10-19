@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var Path = require('path')
+var through = require('through2')
+var assign = require('lodash.assign')
+
+var getInput = require('../lib/input')
+
+var input = getInput(Path.join(__dirname, '..'))
+
+var data = {
+  agentTypes: [],
+  agents: [],
+  relationshipTypes: [],
+  relationships: []
+}
+
+// massage data into redux store
+// TODO automate this using the js vocab
+var dataStream = input
+  .pipe(through.obj(function (obj, enc, cb) {
+    // prefix '@id' refs with Holodex api endpoint
+    // TODO automate this using the js vocab
+    var i = obj.value
+    var o
+    switch (obj.type) {
+      case 'agents':
+        o = {
+          id: i.id,
+          type: i.agentType,
+          displayName: i.name,
+          image: i.image || undefined
+        }
+        break
+      case 'agentTypes':
+        o = {
+          id: i.id,
+          displayName: i.name,
+          description: i.description
+        }
+        break
+      case 'relationships':
+        o = {
+          id: i.id,
+          type: i.relationshipType,
+          source: i.source,
+          target: i.target,
+          context: i.context || undefined
+        }
+        break
+      case 'relationshipTypes':
+        o = {
+          id: i.id,
+          inverse: i.inverse,
+          labels: i.labels.split(','),
+          color: i.color
+        }
+        break
+    }
+    data[obj.type].push(o)
+    cb(null)
+  }, function (cb) {
+    var outputPath = Path.join(__dirname, '..', 'data.json')
+    var output = JSON.stringify(data, null, 2)
+    fs.writeFile(outputPath, output, 'utf8', function (err) {
+      if (err) { throw err }
+      //console.log("done", data)
+      cb()
+    })
+  }))
+
+// TODO get a module yo
+function capitalize (s) {
+  return s[0].toUpperCase() + s.slice(1)
+}
